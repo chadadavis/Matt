@@ -179,3 +179,19 @@ void matrixToQuaternion(Quaternion *out, const Matrix *in) {
 double invHalfCosQuat(const Quaternion *q1, const Quaternion *q2) {
 	return fabs(q1->w*q2->w + dotVect(&q1->v, &q2->v));
 }
+
+void printMat(const Matrix* m) {
+
+    int x;
+    int y;
+    printf("\n");
+    for (x=0;x<3;x++) {
+       for (y=0;y<3;y++) {
+           printf(" %8.5f", m->M[y][x]);
+       }
+       printf(" %8.5f", m->M[x][3]);
+       printf("\n");
+    }
+    printf("\n");
+}
+

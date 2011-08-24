@@ -81,4 +81,6 @@ double invHalfCosQuat(const Quaternion *q1, const Quaternion *q2);
 
 double detMat(Matrix *m);
 
+void printMat(const Matrix* m);
+
 #endif

@@ -998,6 +998,12 @@ void UnbentRMSDAlign(MultipleAlignment *ma) {
 	}
 	AlignOrder(ma, ma->order->root, &i, residuesTemp, indices, matrices);
 
+    static int printed = 0;
+    if (! printed) {
+        printMat(&matrices[1]);
+        printed = 1;
+    }
+
 	for (i=0; i<ma->numChains; i++) {
 		RotateChain(ma->chains[i]->pdb, &matrices[i]);
 	}
