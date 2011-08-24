@@ -1,0 +1,131 @@
+Matt (Multiple Alignment with Translations and Twists) ChangeLog.
+
+Version 1.00 (February 15, 2008):
+
+* Can now run multiple alignments with one command.  They will be run in parallel, often making better use of multiple CPUs/cores for long runs.  Will write to logs instead of the command line when this is done.
+
+* Fixed algorithm to number unnumbered residues.  Change should only affects numbering txt output files and in some pdb files with residues that have the same number.
+
+* Algorithm added to calculate partial alignments from final 3D structure superimpositions.  -p0 disables.
+
+* RMSD alignments of sets of more than two structures now use an extra pass, for slightly tighter alignments,
+
+* Now outputs using a default file name ("MattAlignment") when no name is specified.
+
+* -f added along with msf, pir, and DeepView script output support.
+
+* Fixed octtree bug that could cause crashes on residues that don't have coordinates.  Also added minor related optimization to make the trees fit the points they contain a little better.
+
+* Support for optional search path environment variables added.
+
+* Support for MATT_PARAMS, MATT_SEARCH_PATH, and MATT_PDB_PATH environment variables added.
+
+* ":" can now be used to specify model, and () residues within a chain.
+
+* Replaced "-V" with "-v".  "-v" was originally for version, but as Matt outputs that with no parameters, removed it before initial release.
+
+* Removed the (Incorrect version) of Microsoft's OpenMP.dll included in the last distribution.  Files at http://207.46.19.190/downloads/details.aspx?FamilyID=200b2fd9-ae1a-4a14-984d-389c36f85647&displaylang=en need to be installed instead.
+
+* Significantly reduced blinking of progress indicator text on some platforms.
+
+* All allocated memory is now freed properly when an error is encountered, rather than relying on the OS take care of it.
+
+* Fixed a couple incorrect messages when output file creation failed.
+
+* Tenth RasMol color changed to a slightly more distinct color.
+
+* Option "-d" no longer returns an invalid parameter message.
+
+* Now displays an equivalent command line with all options specified before running a job.
+
+* Text files now contain chain names in the output PDB files.
+
+* RasMol script commands shortened to comply with RasMol's hard-coded line length limit.
+
+
+Version 0.97 (November 27, 2007):
+
+* -b added.
+
+* Fixed the wrong structure being used as the reference structure for bent alignments.
+
+* A fair amount of code cleanup, though more is still needed.
+
+* Removed 1000 aligned residue limit on the final unbent alignment algorithm.
+
+* Switched to source-only Linux release.
+
+
+Version 0.95 (October 11, 2007):
+
+* Matt no longer allocates large amounts of memory that it never uses.  Also, the memory that it does use has been reduced by about four percent.
+
+* Rewrote RMSD code.  Marginally faster than the older library function.  More importantly, can release new code under GPL.
+
+* Matt no longer calculates rotation matrices for blocks with RMSDs too low for it to ever use them.  This gives a small performance increase when run on shorter structures (around 10-20%), but less on longer structures.
+
+* Fixed handling of gaps in ATOM records during alignment phase, so they are treated as specified.  This may result in slightly different results on some structures.
+
+* Fixed some bugs in PDB parser.  PDB files with 1-2 residue chains or particularly creative residue numbering schemes will no longer cause PDB parser to crash.  PDB files in which only some ATOM entries don't have corresponding SEQRES entries are also handled more accurately.
+
+* Dll issues with OpenMP under Windows resolved.  Should run fine under Windows 2000, XP, XP64, Server 2003, and Vista.
+
+* Linux binary now linked statically.
+
+* Several gzip parsing and cleanup bugs fixed.
+
+* Default final extension phase cutoff changed to 5.0.  This is the value used in the paper, 
+
+* Chain names specified when loading structures are now case-sensitive.
+
+* Made some error messages a bit more helpful, replaced other errors with warnings.  All errors now have two asterisks, and warnings one.
+
+* Fixed command parser bug that would cause Matt to attempt to load extra pdb files when using the "file:chain" syntax.  This would result in warning messages when those files could not be found.
+
+* P-value is now written to txt files for pairwise alignments.
+
+* Raw score is written to txt files.
+
+* SEQRES, MASTER, and END entries added to output PDB files.
+
+* Reduced number of characters per line in FASTA files from 80 to 60, as per file format recommendations.
+
+* Switched from using "." to "-" for gaps in alignment files.
+
+* RasMol/Jmol scripts now have one color command per chain. this makes it simpler to change the color used for each chain.
+
+
+
+Version 0.93
+
+* Added support for lists of files.
+
+* Fixed crash issue when SEQRES and ATOM entries have significant discrepancies.
+
+* Windows build compiled without OpenMP support to resolve dll issues.
+
+* Reduced memory usage by about 10%.
+
+
+
+Version 0.92
+
+* Fixed parsing of command line when chains are specified.
+
+* Added -v and -d command line options.
+
+* Removed -i option, as its only function was to force source file names to be the last arguments.  That's no longer necessary.
+
+
+
+Version 0.91
+
+* OpenMP support added.
+
+* Switched to a faster search algorithm in the dynamic programming phase, at a modest cost in memory usage.
+
+
+
+Version 0.90
+
+* Initial release.
